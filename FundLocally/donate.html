@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FundLocally - Donate</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .donation-form {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="business.html">Businesses</a></li>
+            <li><a href="donate.html">Donate</a></li>
+            <li><a href="login.html">Sign Up/Login</a></li>
+        </ul>
+    </nav>
+        
+        <h3>Choose Payment Method</h3>
+        <div class="payment-options">
+            <button>Credit Card</button>
+            <button><a href="https://www.paypal.com/us/home">PayPal</button>
+        </div>
+    </section>
+
+    <div class="donation-form">
+    <h2>Make a Donation</h2>
+    <form id="payment-form">
+      <div id="card-element">
+        <!-- A Stripe Element will be inserted here. -->
+      </div>
+      <button id="submit" type="submit">Donate</button>
+    </form>
+    <p id="error-message" style="color:red; display:none;"></p>
+  </div>
+
+  <script>
+    var stripe = Stripe('YOUR_PUBLISHABLE_KEY'); // Replace with your Stripe public key
+    var elements = stripe.elements();
+    var card = elements.create('card');
+    card.mount('#card-element');
+
+    // Handle form submission
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      stripe.createToken(card).then(function(result) {
+        if (result.error) {
+          // Show error message
+          document.getElementById('error-message').textContent = result.error.message;
+          document.getElementById('error-message').style.display = 'block';
+        } else {
+          // Send the token to your server
+          var token = result.token.id;
+          // Make a request to your backend to process the payment
+          fetch('/process_payment', {
+            method: 'POST',
+            body: JSON.stringify({ token: token, amount: 1000 }), // Example amount in cents
+            headers: { 'Content-Type': 'application/json' }
+          }).then(response => response.json())
+            .then(data => {
+              alert('Donation Successful!');
+            }).catch(err => {
+              alert('Error processing donation');
+            });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
