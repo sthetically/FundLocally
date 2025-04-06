@@ -2,45 +2,105 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    text-align: center;
+    background-color: #f9f9f9;
 }
 
 nav ul {
-    display: flex;
-    justify-content: space-around;
-    background-color: #ddd;
-    padding: 10px;
-    list-style: none;
+    list-style-type: none;
+    padding: 0;
+    background-color: #333;
+    margin: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
 }
 
 nav ul li a {
+    color: white;
     text-decoration: none;
-    color: black;
-    font-weight: bold;
+    padding: 15px 20px;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    background-color: #575757;
 }
 
 header {
-    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 50px;
+    text-align: center;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.businesses-preview {
+    padding: 30px;
+    text-align: center;
+}
+
+.business-profile {
+    padding: 30px;
+    text-align: center;
 }
 
 button {
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    background-color: gray;
+    padding: 10px 15px;
+    background-color: #4CAF50;
     color: white;
+    border: none;
     cursor: pointer;
+    font-size: 16px;
 }
 
-.business img {
-    width: 200px;
-    margin: 10px;
+button a {
+    color: white;
+    text-decoration: none;
 }
 
-.donate, .login, .business-profile {
-    padding: 20px;
+button:hover {
+    background-color: #45a049;
 }
 
-.amount-options button, .payment-options button {
-    width: 100px;
+.donation-form {
+    padding: 30px;
+    text-align: center;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+textarea {
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+form button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border: none;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #45a049;
 }
